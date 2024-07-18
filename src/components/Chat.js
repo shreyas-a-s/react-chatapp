@@ -1,11 +1,23 @@
 import { useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { auth, db } from "../firebase-config";
 
-export const Chat = () => {
+export const Chat = (props) => {
+  const { room } = props;
+
   const [newMessage, setNewMessage] = useState("");
+  const messagesRef = collection(db, "messages");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(newMessage);
+    if (newMessage === "") return;
+
+    await addDoc(messagesRef, {
+      text: newMessage,
+      createdAt: serverTimestamp(),
+      user: auth.currentUser.displayName,
+      room: room // you can also use just 'room' instead of 'room: room'
+    });
   }
 
   return <div className="chat-app">
@@ -14,6 +26,7 @@ export const Chat = () => {
         className="new-message-input"
         placeholder="Type your message here..."
         onChange={(e) => setNewMessage(e.target.value)}
+        value={newMessage}
       />
       <button type="submit" className="send-button">Send</button>
     </form>
