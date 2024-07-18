@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import { Auth } from './components/Auth';
 
@@ -9,6 +9,7 @@ const cookies = new Cookies();
 function App() {
   const [isAuth, setIsAuth] = useState(cookies.get("auth-token"))
   const [room, setRoom] = useState(null);
+  const roomInputRef = useRef(null);
 
   if (!isAuth) {
     return (
@@ -25,8 +26,8 @@ function App() {
       ) : (
           <div className="room">
             <label>Enter Room Name:</label>
-            <input onChange={(e) => setRoom(e.target.value)}/>
-            <button>Enter Chat</button>
+            <input ref={roomInputRef}/>
+            <button onClick={() => setRoom(roomInputRef.current.value)}>Enter Chat</button>
           </div>
         )}
     </div>
