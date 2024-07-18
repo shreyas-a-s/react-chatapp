@@ -2,6 +2,9 @@ import React, { useState, useRef } from 'react';
 import './App.css';
 import { Auth } from './components/Auth';
 
+// component imports
+import { Chat } from './components/Chat';
+
 // cookie imports
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
@@ -22,7 +25,7 @@ function App() {
   return (
     <div>
       {room ? (
-        <div>Chat</div>
+        <Chat />
       ) : (
           <div className="room">
             <label>Enter Room Name:</label>
