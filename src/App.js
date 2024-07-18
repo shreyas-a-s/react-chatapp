@@ -10,9 +10,9 @@ import Cookies from "universal-cookie";
 import { async } from '@firebase/util';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
-const cookies = new Cookies();
 
 function App() {
+  const cookies = new Cookies();
   const [isAuth, setIsAuth] = useState(cookies.get("auth-token"))
   const [room, setRoom] = useState(null);
   const roomInputRef = useRef(null);
