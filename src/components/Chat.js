@@ -38,7 +38,17 @@ export const Chat = (props) => {
   }
 
   return <div className="chat-app">
-    <div>{messages.map((message) => <h1>{message.text}</h1>)}</div>
+    <div className="header">
+      <h1>Welcome to: {room}</h1>
+    </div>
+    <div className="messages">
+      {messages.map((message) => (
+        <div className="message" key={message.id}>
+          <span className="user">{message.user}</span>
+          {message.text}
+        </div>
+      ))}
+    </div>
     <form onSubmit={handleSubmit} className="new-message-form">
       <input
         className="new-message-input"
