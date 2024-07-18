@@ -7,7 +7,6 @@ import { Chat } from './components/Chat';
 
 // cookie imports
 import Cookies from "universal-cookie";
-import { async } from '@firebase/util';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 
